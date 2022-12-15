@@ -31,28 +31,42 @@ public class QuizAccessor {
         }
     }
 
+
     public static List<Quiz> getAllQuizzes() {
         List<Quiz> items = new ArrayList();
+        ResultSet rs;
         try {
             init();
-            ResultSet rs = selectAllStatement.executeQuery();
+            rs = selectAllStatement.executeQuery();
+        } catch (SQLException ex) {
+            System.err.println("************************");
+            System.err.println("** Error retreiving Quizzes");
+            System.err.println("** " + ex.getMessage());
+            System.err.println("************************");
+            return items;
+        }
+        try {
             while (rs.next()) {
-                int id = rs.getInt("QUIZID");
-                String title = rs.getString("QUIZTITLE");
+                String id = rs.getString("quizID");
+                System.out.println("The id is" + id);
+                String title = rs.getString("quizTitle");
                 Quiz item = new Quiz(id, title);
                 items.add(item);
             }
         } catch (SQLException ex) {
-            items = new ArrayList();
+            System.err.println("************************");
+            System.err.println("** Error populating Quizzes");
+            System.err.println("** " + ex.getMessage());
+            System.err.println("************************");
         }
         return items;
     }
 
-    public static Quiz getQuiz(int id) {
+    public static Quiz getQuiz(String id) {
 
         try {
             init();
-            selectOne.setInt(1, id);
+            selectOne.setString(1, id);
             ResultSet rs = selectOne.executeQuery();
             while (rs.next()) {
                 String title = rs.getString("QUIZTITLE");

@@ -6,8 +6,8 @@ package db;
 public class ConnectionParameters {
     
     public static final String URL = "jdbc:mysql://localhost:3306/quizappdb";
-    public static final String USERNAME = "app";
-    public static final String PASSWORD = "app";
+    public static final String USERNAME = "root";
+    public static final String PASSWORD = "root";
     
     // no instantiation allowed
     private ConnectionParameters() {}

@@ -5,7 +5,11 @@
         <group>
             <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/src/java/db/ConnectionParameters.java</file>
             <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/web/index.html</file>
-            <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/web/main.js</file>
+            <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/src/java/entity/Quiz.java</file>
+            <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/src/java/db/QuizAccessor.java</file>
+            <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/src/java/controller/GetQuizzes.java</file>
+            <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/web/homePage.jsp</file>
+            <file>file:/C:/Users/kenzi/OneDrive/Desktop/Advanced%20Java/FinalProject/src/java/db/ConnectionManager.java</file>
         </group>
     </open-files>
 </project-private>

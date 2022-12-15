@@ -20,7 +20,7 @@
 
             <table class="table table-light table-bordered">
                 <tr><th>ID</th><th>Quiz Title</th></tr>
-                        <c:forEach items="${allQuizzes}" var="temp">
+                        <c:forEach items="${theQuizzes}" var="temp">
                     <tr>
                         <td>${temp.quizID}</td>
                         <td>${temp.quizTitle}</td>

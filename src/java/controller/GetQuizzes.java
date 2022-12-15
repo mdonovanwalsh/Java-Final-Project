@@ -1,9 +1,7 @@
 package controller;
-
 import db.QuizAccessor;
 import entity.Quiz;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,17 +31,17 @@ public class GetQuizzes extends HttpServlet {
             throws ServletException, IOException{
         
             System.err.println("************************");
-            System.err.println("** GetQuizzes ");
+            System.err.println("**GetQuizzes ");
             System.err.println("************************");
             
             response.setContentType("text/html;charset=UTF-8");
         
         List<Quiz> allQuizzes = QuizAccessor.getAllQuizzes();
-        System.out.println("HI");
+
         // store allItems in session
         HttpSession session = request.getSession();
-        session.setAttribute("allQuizzes", allQuizzes);
-        System.out.println(allQuizzes);
+        session.setAttribute("theQuizzes", allQuizzes);
+        System.out.println("List of quizzes: " + allQuizzes);
         // forward to JSP
         String path = "/homePage.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(path);
