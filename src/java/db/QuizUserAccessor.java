@@ -1,12 +1,10 @@
 package db;
 
+import entity.QuizUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import entity.QuizUser;
 
 /**
  *
@@ -28,26 +26,26 @@ public class QuizUserAccessor {
         }
     }
 
-
-    public static boolean verifyUser() {
-        boolean verify;
+    public static QuizUser getUser(String usernameIn) {
+        QuizUser user = null;
         ResultSet rs = null;
         try {
             init();
+            selectStatement.setString(1, usernameIn);
             rs = selectStatement.executeQuery();
-            if (rs != null) {
+            while (rs.next()) {
+                String username = rs.getString("USERNAME");
                 String password = rs.getString("PASSWORD");
-                String encryptedPassword = encode(password);
-            } else {
-                verify = false;
+                String permissionLevel = rs.getString("PERMISSIONLEVEL");
+                user = new QuizUser(username, password, permissionLevel);
             }
         } catch (SQLException ex) {
             System.err.println("************************");
             System.err.println("** Error retreiving Quiz Users");
             System.err.println("** " + ex.getMessage());
             System.err.println("************************");
-            verify = false;
+            user = null;
         }
-        return verify;
+        return user;
     }
 }

@@ -1,7 +1,10 @@
 package controller;
 
+import db.QuizUserAccessor;
+import entity.QuizUser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,18 +30,26 @@ public class verifyUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet verifyUser</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet verifyUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        QuizUser user = QuizUserAccessor.getUser(username);
+
+        if (user == null) {
+            //send back with error "user doesn't exist"
+            String path = "/index.html";
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } else {
+            String encryptedPassword = user.getPassword();
+            //encrypt base password to test match
+            if ( /*if password doesn't match*/!password.equals(encryptedPassword)) {
+                //send back with error  "password incorrect"
+            } else {
+                //log in
+            }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
