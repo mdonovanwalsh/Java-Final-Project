@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,17 +8,24 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
+        <%
+            String error = (String) session.getAttribute("Error");
+            if (error == null) {
+                error = "";
+            }
+        %>
         <div class="container"><br>
             <h3 class="mb-4">Quiz Application</h3>
             <div class="row p-3 mb-3 bg-light border border-secondary">
                 <div class="col-9 col-xl-10 fs-2">Welcome!</div><br><br><br>
                 <div>
-                    <form action="verifyUser">
-                    <label for="username">Username: </label>
-                    <input name="username" type="text" required><br><br>
-                    <label for="password">Password: </label>
-                    <input name="password" type="text" required><br><br>
-                    <button class="btn btn-outline-secondary me-3" type="submit">Login</button><br>
+                    <form action="verifyUser" method="get">
+                        <label for="username">Username: </label>
+                        <input name="username" type="text" required><br><br>
+                        <label for="password">Password: </label>
+                        <input name="password" type="text" required><br><br>
+                        <button class="btn btn-outline-secondary me-3" type="submit">Login</button><br>
+                        <%= error %>
                     </form>
                 </div>
             </div>

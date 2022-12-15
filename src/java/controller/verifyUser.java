@@ -3,13 +3,13 @@ package controller;
 import db.QuizUserAccessor;
 import entity.QuizUser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,24 +31,7 @@ public class verifyUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        QuizUser user = QuizUserAccessor.getUser(username);
-
-        if (user == null) {
-            //send back with error "user doesn't exist"
-            String path = "/index.html";
-            RequestDispatcher rd = request.getRequestDispatcher(path);
-            rd.forward(request, response);
-        } else {
-            String encryptedPassword = user.getPassword();
-            //encrypt base password to test match
-            if ( /*if password doesn't match*/!password.equals(encryptedPassword)) {
-                //send back with error  "password incorrect"
-            } else {
-                //log in
-            }
-        }
+        
 
     }
 
@@ -65,6 +48,34 @@ public class verifyUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        QuizUser user = QuizUserAccessor.getUser(username);
+
+        if (user == null) {
+            //send back with error "user doesn't exist"
+            String error = "ERROR: Username " + username + " does not exist in DB";
+            HttpSession session = request.getSession();
+            session.setAttribute("Error", error);
+            String path = "/index.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } else {
+            if (password == null) {
+                String error = "ERROR: Password cannot be left blank";
+                HttpSession session = request.getSession();
+                session.setAttribute("Error", error);
+                String path = "/index.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(path);
+                rd.forward(request, response);
+            } else {
+                //log in
+                String path = "/GetQuizzes";
+                RequestDispatcher rd = request.getRequestDispatcher(path);
+                rd.forward(request, response);
+            }
+        }
     }
 
     /**

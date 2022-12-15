@@ -12,7 +12,7 @@
     <body>
         <br>
         <div class="container">
-            <form action="index.html">
+            <form action="index.jsp">
 
                 <button class="btn btn-outline-secondary me-3" type="submit">Logout</button><br><br>
             </form>
