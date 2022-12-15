@@ -17,7 +17,9 @@
                 <button class="btn btn-outline-secondary me-3" type="submit">Logout</button><br><br>
             </form>
             <h2 class="mb-4">Welcome to the Quiz Application!</h2>
-
+            <form action="">
+                <button class="btn btn-outline-secondary me-3" type="submit">Take Selected Quiz</button><br><br>
+            </form>
             <table class="table table-light table-bordered">
                 <tr><th>ID</th><th>Quiz Title</th></tr>
                         <c:forEach items="${theQuizzes}" var="temp">
