@@ -1,6 +1,5 @@
 package db;
 
-import db.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,9 +46,9 @@ public class QuizAccessor {
         }
         try {
             while (rs.next()) {
-                String id = rs.getString("quizID");
+                String id = rs.getString("QUIZID");
                 System.out.println("The id is" + id);
-                String title = rs.getString("quizTitle");
+                String title = rs.getString("QUIZTITLE");
                 Quiz item = new Quiz(id, title);
                 items.add(item);
             }

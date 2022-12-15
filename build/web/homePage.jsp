@@ -22,8 +22,8 @@
                 <tr><th>ID</th><th>Quiz Title</th></tr>
                         <c:forEach items="${theQuizzes}" var="temp">
                     <tr>
-                        <td>${temp.quizID}</td>
-                        <td>${temp.quizTitle}</td>
+                        <td>${temp.getQuizId()}</td>
+                        <td>${temp.getQuizTitle()}</td>
                     </tr>
                 </c:forEach>
             </table>
