@@ -16,6 +16,7 @@ public class QuizAccessor {
 
     private static Connection conn = null;
     private static PreparedStatement selectAllStatement = null;
+    private static PreparedStatement selectStatement = null;
     private static PreparedStatement selectOne = null;
 
     private QuizAccessor() {
@@ -26,6 +27,7 @@ public class QuizAccessor {
         if (conn == null) {
             conn = ConnectionManager.getConnection(ConnectionParameters.URL, ConnectionParameters.USERNAME, ConnectionParameters.PASSWORD);
             selectAllStatement = conn.prepareStatement("select * from quiz");
+            selectStatement = conn.prepareStatement("select * from quiz where UPPER(quizTitle) like UPPER(?)");
             selectOne = conn.prepareStatement("select * from quiz where QUIZID=?");
         }
     }
@@ -37,6 +39,37 @@ public class QuizAccessor {
         try {
             init();
             rs = selectAllStatement.executeQuery();
+        } catch (SQLException ex) {
+            System.err.println("************************");
+            System.err.println("** Error retreiving Quizzes");
+            System.err.println("** " + ex.getMessage());
+            System.err.println("************************");
+            return items;
+        }
+        try {
+            while (rs.next()) {
+                String id = rs.getString("QUIZID");
+                System.out.println("The id is" + id);
+                String title = rs.getString("QUIZTITLE");
+                Quiz item = new Quiz(id, title);
+                items.add(item);
+            }
+        } catch (SQLException ex) {
+            System.err.println("************************");
+            System.err.println("** Error populating Quizzes");
+            System.err.println("** " + ex.getMessage());
+            System.err.println("************************");
+        }
+        return items;
+    }
+    
+    public static List<Quiz> getQuizzesLike(String regex) {
+        List<Quiz> items = new ArrayList();
+        ResultSet rs;
+        try {
+            selectStatement.setString(1, "%" + regex + "%");
+            init();
+            rs = selectStatement.executeQuery();
         } catch (SQLException ex) {
             System.err.println("************************");
             System.err.println("** Error retreiving Quizzes");

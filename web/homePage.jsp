@@ -8,6 +8,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <title>Home Page</title>
+        <style>
+            input {
+                width: 90%;
+            }
+        </style>
     </head>
     <body>
         <br>
@@ -17,6 +22,11 @@
                 <button class="btn btn-outline-secondary me-3" type="submit">Logout</button><br><br>
             </form>
             <h2 class="mb-4">Welcome to the Quiz Application!</h2>
+            
+            <form action="GetQuizzes">
+            <input type="text" name="searchKey" placeholder="Enter a full or partial quiz title! | Leave blank to see all | Case-insensitive"></input>
+            <button name="searchButton" value="clicked" required>Search</button>
+            </form>
 
             <table class="table table-light table-bordered">
                 <tr><th>ID</th><th>Quiz Title</th></tr>

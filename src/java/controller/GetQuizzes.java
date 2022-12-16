@@ -36,12 +36,19 @@ public class GetQuizzes extends HttpServlet {
             
             response.setContentType("text/html;charset=UTF-8");
         
-        List<Quiz> allQuizzes = QuizAccessor.getAllQuizzes();
+            
+        List<Quiz> quizzes;
+        if (request.getParameter("searchButton") != null && !"".equals(request.getParameter("searchKey")) && request.getParameter("searchKey") != null) {
+            String searchTerm = request.getParameter("searchKey");
+            quizzes = QuizAccessor.getQuizzesLike(searchTerm.toUpperCase());
+        } else {
+            quizzes = QuizAccessor.getAllQuizzes();
+        }  
 
         // store allItems in session
         HttpSession session = request.getSession();
-        session.setAttribute("theQuizzes", allQuizzes);
-        System.out.println("List of quizzes: " + allQuizzes);
+        session.setAttribute("theQuizzes", quizzes);
+        System.out.println("List of quizzes: " + quizzes);
         // forward to JSP
         String path = "/homePage.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(path);
