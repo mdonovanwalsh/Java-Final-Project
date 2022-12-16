@@ -1,0 +1,18 @@
+
+.login-box {
+    border: solid black thin;
+    border-radius: 10px;
+    background-color: rgba(245, 245, 244, 1);
+    padding: 2.5em 2em 2em 2em;
+}
+.logo {
+    position: relative;
+    top: 3.75em;
+    text-align: center;
+}
+
+.logo img {
+    border-radius: 25%;
+    height: 7.5em;
+    width: 7.5em;
+}

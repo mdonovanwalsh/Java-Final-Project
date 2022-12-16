@@ -7,6 +7,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/x-icon" href="images/logo/favicon.ico">
+        <link rel="stylesheet" href="styles/quiz.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <title>Quiz Page</title>
         <style>
@@ -16,6 +18,26 @@
         </style>
     </head>
     <body>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="col-lg-3">
+                    <a class="navbar-brand" href="index.php">
+                        <img src="images/logo/logo.png" alt="" width="65" height="65">
+                    </a>
+                </div>
+                <div style="text-align: center;">
+                    <h1>Java Quiz App</h1>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex float-end">
+                        <form action="index.jsp">
+                            <button class="btn btn-outline-secondary me-3" type="submit">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <br>
         <%
             Quiz quiz = (Quiz) session.getAttribute("quiz");
             String title = quiz.getQuizTitle();
@@ -24,19 +46,23 @@
         %>
         <br>
         <div class="container">
-            <form action="index.jsp">
-
-                <button class="btn btn-outline-secondary me-3" type="submit">Logout</button><br><br>
-            </form>
             <h2 class="mb-4"><%= title%></h2>
 
 
-
+            <c:set var="count" value="1" scope="page" />
             <c:forEach items="${questions}" var="temp">
-                <p>${temp.questionText}</p>
-                <c:forEach items="${temp.choices}" var = "tempChoice">
-                    <input type="radio" name="${temp.questionID}" value="${tempChoice}">${tempChoice}
-                </c:forEach>
+                <div class="container">
+                    <h4 class="quizTitle">Question #${count}</h4>
+                    <p class="quizQuestion">${temp.questionText}</p>
+                    <c:forEach items="${temp.choices}" var = "tempChoice">
+                    <div class="form-check">
+                        <input type="radio" name="${temp.questionID}" class="form-check-input" id="flexCheckDefault" value="${tempChoice}" required>
+                        <label class="form-check-label" for="flexCheckDefault">${tempChoice}</label>
+                    </div>
+                    </c:forEach>
+                </div>
+                <br>
+            <c:set var="count" value="${count + 1}" scope="page"/>
             </c:forEach>
 
         </div>
