@@ -29,11 +29,14 @@
             </form>
 
             <table class="table table-light table-bordered">
-                <tr><th>ID</th><th>Quiz Title</th></tr>
+                <tr><th>ID</th><th>Quiz Title</th><th>Take Quiz</th></tr>
                         <c:forEach items="${theQuizzes}" var="temp">
                     <tr>
                         <td>${temp.getQuizId()}</td>
                         <td>${temp.getQuizTitle()}</td>
+                    <form action="buildQuiz" method="get">
+                        <td><button type="submit" name="quizID" value="${temp.getQuizId()}">Take Quiz!</button></td>
+                    </form>
                     </tr>
                 </c:forEach>
             </table>
