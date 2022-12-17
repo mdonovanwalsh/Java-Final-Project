@@ -20,7 +20,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div class="col-lg-3">
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="homePage.jsp">
                         <img src="images/logo/logo.png" alt="" width="65" height="65">
                     </a>
                 </div>
@@ -57,8 +57,6 @@
                         <div class="card-header">
                             <div class="tag-colour"></div>
                             <h5 class="card-title">${temp.getQuizTitle()}</h5>
-                            <h6 class="card-subtitle text-secondary float-end">Number of Questions: <span>NULL</span></h6>
-                            <h6 class="card-subtitle text-secondary float-end">Number of Points: <span>NULL</span></h6>
                         </div>
                         <div class="card-body text-center">
                             <form action="buildQuiz" method="GET">

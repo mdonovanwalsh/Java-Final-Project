@@ -21,7 +21,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div class="col-lg-3">
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="homePage.jsp">
                         <img src="images/logo/logo.png" alt="" width="65" height="65">
                     </a>
                 </div>
@@ -66,7 +66,7 @@
                 </c:forEach>
 
 
-                <button type="submit">Submit Quiz</button>
+                <button type="submit" class="btn btn-outline-success">Submit Quiz</button>
             </form>
 
         </div>
