@@ -42,33 +42,25 @@
             Quiz quiz = (Quiz) session.getAttribute("quiz");
             String title = quiz.getQuizTitle();
 
-            List<Question> questions = (List<Question>) session.getAttribute("questions");
+            Integer correctAnswers = (Integer) session.getAttribute("correctAnswers");
+            Integer questionCount = (Integer) session.getAttribute("questionCount");
+            double percentage = (int) correctAnswers / (double) questionCount * 100.0;
         %>
         <br>
         <div class="container">
-            <h2 class="mb-4"><%= title%></h2>
-
-            <form action="completeQuiz" method="get">
-                <c:set var="count" value="1" scope="page" />
-                <c:forEach items="${questions}" var="temp">
-                    <div class="container">
-                        <h4 class="quizTitle">Question #${count}</h4>
-                        <p class="quizQuestion">${temp.questionText}</p>
-                        <c:forEach items="${temp.choices}" var = "tempChoice">
-                            <div class="form-check">
-                                <input type="radio" name="${temp.questionID}" class="form-check-input" id="flexCheckDefault" value="${tempChoice}" required>
-                                <label class="form-check-label" for="flexCheckDefault">${tempChoice}</label>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    <br>
-                    <c:set var="count" value="${count + 1}" scope="page"/>
-                </c:forEach>
+            <h2 class="mb-4">Score for Quiz: <%= title%></h2>
 
 
-                <button type="submit">Submit Quiz</button>
-            </form>
+            <p>You scored <%= correctAnswers%> out of <%= questionCount %> (<%= percentage%>%)</p>
 
+                <form action="quizResults" method="post">
+                    <button type="submit">View all Quiz Results</button>
+                </form>
+                
+                <form action="GetQuizzes" method="post">
+                    <button type="submit">Back to Quizzes</button>
+                </form>
+                
         </div>
     </body>
 </html>
